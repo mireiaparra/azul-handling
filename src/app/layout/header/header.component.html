@@ -1,3 +1,21 @@
 <header class="header">
+    <div class="header__filters">
+        <div class="header__filters--top">
+            <div class="input__container">
+                <input class="input" [matDatepicker]="picker">
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </div>
+                <mat-select class="input">
+                    <mat-option value="option1">TFS</mat-option>
+                    <mat-option value="option2">SVQ</mat-option>
+                  </mat-select>
+        </div>
+
+        <div class="input__container">
+            <input type="text" class="input" placeholder="Flight, Orig, Dest, Reg, Team Leader">
+            <i class="fa-solid fa-magnifying-glass input__icon"></i>
+        </div>
+    </div>
     <h1 class="header__title">Operations</h1>
 </header>

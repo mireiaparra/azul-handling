@@ -1,16 +1,29 @@
 .header {
-    height: 75px;
+    height: 95px;
     position: sticky;
     top: 0;
     background-color: $azul-oscuro;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
     padding: 20px;
 
     &__title {
         color: white;
         font-size: 32px;
         font-weight: 700;
+    }
+    &__filters {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 316px;
+        &--top {
+            display: flex;
+            gap: 10px;
+            & * .input {
+                width: 100px;
+            }
+        }
     }
 }

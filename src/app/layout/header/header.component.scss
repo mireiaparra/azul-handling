@@ -1,0 +1,13 @@
+mat-datepicker-toggle {
+    position: absolute;
+    right: 0;
+}
+
+::ng-deep .mat-mdc-select  {
+    height: 14px !important;
+  }
+
+  ::ng-deep .mat-mdc-select-arrow-wrapper {
+    position: absolute;
+    right: -10px;
+  }

@@ -9,6 +9,10 @@ import { HomeComponent } from './components/home/home.component';
 import { DeparturesComponent } from './components/home/departures/departures.component';
 import { FlightsComponent } from './components/home/flights/flights.component';
 import { ArrivalsComponent } from './components/home/arrivals/arrivals.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -22,7 +26,11 @@ import { ArrivalsComponent } from './components/home/arrivals/arrivals.component
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
