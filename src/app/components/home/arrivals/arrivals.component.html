@@ -1,17 +1,26 @@
 <section class="table">
     <div class="table__title">ARRIVALS</div>
   
-    <div class="table__row">
+    <div class="table__row table__row--head">
       <div class="table__cell">Flight Nº</div>
-      <div class="table__cell">Dest</div>
-      <div class="table__cell">CTOT</div>
-      <div class="table__cell">ETD</div>
-      <div class="table__cell">STD</div>
-      <div class="table__cell">ATD</div>
+      <div class="table__cell">Orig</div>
+      <div class="table__cell">ETA</div>
+      <div class="table__cell">STA</div>
+      <div class="table__cell">ATA</div>
       <div class="table__cell">TOB</div>
       <div class="table__cell">BAG</div>
       <div class="table__cell">Stand</div>
       <div class="table__cell"></div>
+    </div>
+    <div class="table__row" *ngFor="let flight of flights">
+        <div class="table__cell">{{flight.flight_iata}}</div>
+        <div class="table__cell">{{flight.dep_iata}}</div>
+        <div class="table__cell">{{flight.dep_estimated_utc}}</div>
+        <div class="table__cell">{{flight.dep_time_utc}}</div>
+        <div class="table__cell"></div>
+        <div class="table__cell">{{flight.delayed}}</div>
+        <div class="table__cell">{{flight.arr_baggage}}</div>
+        <div class="table__cell">...</div>
     </div>
   </section>
     
