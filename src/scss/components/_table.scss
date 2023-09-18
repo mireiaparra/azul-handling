@@ -1,0 +1,21 @@
+.table {
+    width: 100%;
+    background-color: $azul-oscuro;
+    color: $amarillo;
+    &__row {
+        display: grid;
+        grid-template-columns: minmax(0, 0.5fr) repeat(4, minmax(0, 1fr));
+        height: 44px;    
+        border: 1px solid gray;
+        align-items: center;
+    }
+    &__cell {
+        max-width: 100%;
+    }
+    &__title{
+        height: 22px;
+        border: 1px solid $azul-claro;
+        text-align: center;
+        padding: 5px;
+    }
+}
