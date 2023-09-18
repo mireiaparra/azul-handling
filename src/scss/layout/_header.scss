@@ -1,0 +1,16 @@
+.header {
+    height: 75px;
+    position: sticky;
+    top: 0;
+    background-color: $azul-oscuro;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 20px;
+
+    &__title {
+        color: white;
+        font-size: 32px;
+        font-weight: 700;
+    }
+}
