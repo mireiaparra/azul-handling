@@ -3,6 +3,7 @@ const http = require("http");
 const socketIo = require("socket.io");
 
 const mysql = require("mysql");
+const path = require("path");
 
 const app = express();
 const server = http.createServer(app);
@@ -24,6 +25,8 @@ db.connect((err) => {
     console.log("Connected to the database");
   }
 });
+
+app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/socket.io/socket.io.js", (req, res) => {
   res.sendFile(__dirname + "/node_modules/socket.io/client-dist/socket.io.js");
