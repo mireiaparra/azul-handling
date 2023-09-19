@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiService } from 'src/app/core/api.service';
+import { SocketService } from 'src/app/core/socket.service';
 
 @Component({
   selector: 'app-flights',
@@ -18,7 +19,6 @@ export class FlightsComponent {
   }
 
   ngOnInit(): void {
-    this.socketService.connect();
 
     this.socketService.on('initialData', (data: any[]) => {
       this.flights = data;

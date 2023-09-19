@@ -15,7 +15,7 @@ export class SocketService {
     this.socket.emit(event, data);
   }
 
-  public on(event: string, callback: Function): void {
+  public on(event: string, callback: any): void {
     this.socket.on(event, callback);
   }
 
