@@ -11,6 +11,7 @@ import { SnackbarComponent } from '../snackbar/snackbar.component';
 export class HomeComponent {
 
   public newFlights: any[] = [];
+  public isNavOpen: boolean = false;
 
   constructor(private _socketService: SocketService, private _snackBar: MatSnackBar) {}
 
@@ -37,5 +38,13 @@ export class HomeComponent {
     snackBarRef.afterDismissed().subscribe(() => {
     this.newFlights = [];
     });
+  }
+
+  public openNav(){
+    this.isNavOpen = true;
+  }
+
+  public closeNav(event: any){
+    if(event) this.isNavOpen = false;
   }
 }

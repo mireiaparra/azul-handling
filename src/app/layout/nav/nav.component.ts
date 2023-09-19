@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-nav',
@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class NavComponent {
 
+@Output() public close: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+public closeNav(){
+  this.close.emit(true);
+}
 }

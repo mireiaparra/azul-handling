@@ -1,5 +1,8 @@
 <main class="home">
-    <app-nav></app-nav>
+    <app-nav *ngIf="isNavOpen; else isNavClosed" (close)="closeNav($event)"></app-nav>
+    <ng-template #isNavClosed >
+        <i (click)="openNav()" class="fa-solid fa-chevron-down nav__icon"></i>
+    </ng-template>
     <app-flights></app-flights>
     <app-arrivals></app-arrivals>
     <app-departures></app-departures>
