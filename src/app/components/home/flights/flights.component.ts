@@ -32,18 +32,21 @@ export class FlightsComponent {
     });
 
     this.socketService.on('dataUpdated', (data: any) => {
-      const method = data.method; 
-
+      const method = data.method;
       if (method === 'PUT') {
-        this.updatedFlightId = data.id;
-
+        this.updatedFlightId = data.newFlight.reg_number;
         setTimeout(() => {
           this.updatedFlightId = null;
         }, 2000);
       }
-        if (method === 'POST') {
-          this.flights.push(data.newFlight); 
-        }
+      const flightExistIndex = this.flights.findIndex(
+        (flight) => flight.reg_number === this.updatedFlightId
+      );
+      if (flightExistIndex !== -1) {
+        this.flights.splice(flightExistIndex, 1, data.newFlight);
+      } else {
+        this.flights.push(data.newFlight);
+      }
     });
 
     this._filtersService.airportFilter$.subscribe((airportCode) => {

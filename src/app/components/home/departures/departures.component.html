@@ -10,9 +10,9 @@
     <div class="table__cell">ATD</div>
     <div class="table__cell">TOB</div>
   </div>
-  <div class="table__row" *ngFor="let flight of flights">
+  <div class="table__row" *ngFor="let flight of filteredFlights">
     <div class="table__cell">{{ flight.flight_iata }}</div>
-    <div class="table__cell">{{ flight.arr_iata }}</div>
+    <div class="table__cell">{{ flight.dep_iata }}</div>
     <div class="table__cell">{{ flight.delayed }}</div>
     <div class="table__cell">-:-</div>
     <div class="table__cell">{{ flight.arr_time_utc | date : "HH:mm" }}</div>

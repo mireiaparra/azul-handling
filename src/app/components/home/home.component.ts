@@ -17,14 +17,14 @@ export class HomeComponent {
 
   ngOnInit(): void {
     this._socketService.on('newFlight', (newFlight: any) => {
-      this.newFlights.push(newFlight);
+
+      this.newFlights.push(newFlight.newFlight);
+
       this._showSnackBar();
     });
   }
 
   private _showSnackBar(): void {
-    const message = 'New flights detected';
-    const action = 'Close';
 
     const snackBarRef = this._snackBar.openFromComponent(SnackbarComponent, {
       data: {

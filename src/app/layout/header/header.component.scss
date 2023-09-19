@@ -17,3 +17,7 @@ mat-datepicker-toggle {
     position: absolute;
     bottom: -2px;
 }
+
+::ng-deep .cdk-overlay-pane{
+    left: 244px !important;
+}

@@ -11,7 +11,7 @@
   <div
     class="table__row"
     *ngFor="let flight of flights"
-    [ngClass]="{ 'updated-row': flight.id === updatedFlightId }"
+    [ngClass]="{ 'updated-row': flight.reg_number === updatedFlightId }"
   >
     <div><i class="fa-solid fa-chevron-right table__cell"></i></div>
     <div class="table__cell">{{ flight.dep_iata }}</div>

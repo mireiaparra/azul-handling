@@ -1,5 +1,6 @@
 <mat-icon>{{ data.icon }}</mat-icon>
+<h2>New flight detected</h2>
 <div *ngFor="let flight of data.flights">
-  {{ flight.nombre }} - {{ flight.destino }}
+  {{ flight.aircraft_icao }} / {{flight.reg_number}} 
 </div>
 

@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatSelectChange } from '@angular/material/select';
 import { ApiService } from 'src/app/core/api.service';
+import { DbService } from 'src/app/core/db.service';
 import { FiltersService } from 'src/app/core/filters.service';
+import { SharedService } from 'src/app/core/shared.service';
+import { SocketService } from 'src/app/core/socket.service';
 
 @Component({
   selector: 'app-header',
@@ -9,24 +12,23 @@ import { FiltersService } from 'src/app/core/filters.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
+
+  
   public flights: any[] = [];
   public airports: any[] = [];
   public selectedDate: Date;
 
-  constructor(
-    private _apiService: ApiService,
-    private _filtersService: FiltersService
-  ) {
-    this._apiService.getFlights().subscribe({
-      next: (data) => {
-        this.flights = data.data;
-      },
-    });
+   inputValue = '';
 
-    this._apiService.getAirports().subscribe({
-      next: (data) => {
-        this.airports = data.data;
-      },
+
+  constructor(
+    private _socketService: SocketService,
+    private _filtersService: FiltersService,
+    private _communicationService: SharedService
+  ) {
+    this._socketService.on('initialData', (data: any[]) => {
+      this.flights = data;
+      this.airports = Array.from(new Set(this.flights.map((flight) => flight.dep_iata)));
     });
 
     this.selectedDate = new Date();
@@ -44,5 +46,11 @@ export class HeaderComponent {
   public setToday() {
     this.selectedDate = new Date();
     this._filtersService.setDateFilter(this.selectedDate);
+  }
+
+  onEnter(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      this._communicationService.setInputValue(this.inputValue);
+    }
   }
 }
