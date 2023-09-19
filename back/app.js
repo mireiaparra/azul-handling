@@ -1,39 +1,58 @@
-// Import necessary modules
-const express = require('express');
-const mysql = require('mysql');
+const express = require("express");
+const http = require("http");
+const socketIo = require("socket.io");
+
+const mysql = require("mysql");
 
 const app = express();
+const server = http.createServer(app);
+const io = socketIo(server);
+
 const port = process.env.PORT || 3000;
 
 const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'mireia',
-  password: 'azul_prueba',
-  database: 'flights'
+  host: "localhost",
+  user: "mireia",
+  password: "azul_prueba",
+  database: "flights",
 });
 
 db.connect((err) => {
   if (err) {
-    console.error('Error connecting to the database: ' + err);
+    console.error("Error connecting to the database: " + err);
   } else {
-    console.log('Connected to the database');
+    console.log("Connected to the database");
   }
 });
 
-app.get('/getFlights', (req, res) => {
-  const sql = 'SELECT * FROM flights';
+app.get("/socket.io/socket.io.js", (req, res) => {
+  res.sendFile(__dirname + "/node_modules/socket.io/client-dist/socket.io.js");
+});
 
-  db.query(sql, (err, result) => {
+io.on("connection", (socket) => {
+  db.query("SELECT * FROM flights", (err, result) => {
     if (err) {
-      console.error('Error executing the query: ' + err);
-      res.status(500).json({ error: 'Error fetching flights' });
+      console.error("Error fetching flight data:  " + err);
     } else {
-      res.json(result); 
+      socket.emit("initialData", result);
     }
   });
+
+  const databaseChangeWatcher = () => {
+    const query = "SELECT * FROM flights";
+
+    db.query(query, (err, result) => {
+      if (err) {
+        console.error("Error fetching flight data: " + err);
+      } else {
+        socket.emit("dataUpdated", result);
+      }
+    });
+  };
+
+  setInterval(databaseChangeWatcher, 5000);
 });
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Express server is listening on port ${port}`);
 });
-
