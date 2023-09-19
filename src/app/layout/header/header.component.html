@@ -33,6 +33,8 @@
         type="text"
         class="input"
         placeholder="Flight, Orig, Dest, Reg, Team Leader"
+        [(ngModel)]="inputValue"
+        (keyup.enter)="onEnter($event)"
       />
       <i class="fa-solid fa-magnifying-glass input__icon"></i>
     </div>

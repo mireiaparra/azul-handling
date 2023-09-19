@@ -12,9 +12,9 @@
     <div class="table__cell">Stand</div>
     <div class="table__cell"></div>
   </div>
-  <div class="table__row" *ngFor="let flight of flights">
+  <div class="table__row" *ngFor="let flight of filteredFlights">
     <div class="table__cell">{{ flight.flight_iata }}</div>
-    <div class="table__cell">{{ flight.dep_iata }}</div>
+    <div class="table__cell">{{ flight.arr_iata }}</div>
     <div class="table__cell">
       {{ flight.dep_estimated_utc | date : "HH:mm" }}
     </div>

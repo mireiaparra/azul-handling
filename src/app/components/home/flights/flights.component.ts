@@ -18,13 +18,7 @@ export class FlightsComponent {
     private socketService: SocketService,
     private _filtersService: FiltersService,
     private _dbService: DbService
-  ) {
-    // this._apiService.getFlights().subscribe({
-    //   next: (data) => {
-    //     this.flights = data.data;
-    //   },
-    // });
-  }
+  ) {}
 
   ngOnInit(): void {
     this.socketService.on('initialData', (data: any[]) => {

@@ -48,9 +48,8 @@ export class HeaderComponent {
     this._filtersService.setDateFilter(this.selectedDate);
   }
 
-  onEnter(event: KeyboardEvent) {
-    if (event.key === 'Enter') {
+  onEnter(event: Event) {
       this._communicationService.setInputValue(this.inputValue);
-    }
+    
   }
 }

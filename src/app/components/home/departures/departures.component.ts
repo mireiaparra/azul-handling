@@ -21,11 +21,14 @@ export class DeparturesComponent {
     });
      this._communicationService.inputValue$.subscribe((value) => {
       this.receivedValue = value;
-      this.filterFlights(value);
+      this._filterFlights(value);
     });
   }
 
-  public filterFlights(param: string) {
-    this.filteredFlights = this.flights.filter(flight => flight.flight_iata.toLowerCase().trim().includes(param.toLowerCase().trim()) || flight.flight.dep_iata.toLowerCase().trim().includes(param.toLowerCase().trim()));
+  private _filterFlights(param: string) {
+    this.filteredFlights = this.flights.filter(flight =>
+       {
+        return flight.flight_iata.toLowerCase().trim().includes(param.toLowerCase().trim()) || flight.dep_iata.toLowerCase().trim().includes(param.toLowerCase().trim())}
+       );
   }
 }
