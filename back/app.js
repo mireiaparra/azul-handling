@@ -38,19 +38,15 @@ io.on("connection", (socket) => {
     }
   });
 
-  const databaseChangeWatcher = () => {
-    const query = "SELECT * FROM flights";
+  const changeStream = db.query("SELECT * FROM flights").stream();
 
-    db.query(query, (err, result) => {
-      if (err) {
-        console.error("Error fetching flight data: " + err);
-      } else {
-        socket.emit("dataUpdated", result);
-      }
-    });
-  };
+  changeStream.on("data", (data) => {
+    socket.emit("dataUpdated", data);
+  });
 
-  setInterval(databaseChangeWatcher, 5000);
+  changeStream.on("end", () => {
+    console.log("Observer finished");
+  });
 });
 
 server.listen(port, () => {
