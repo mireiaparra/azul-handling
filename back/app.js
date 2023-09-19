@@ -1,5 +1,4 @@
 const express = require("express");
-const router = express.Router();
 const http = require("http");
 const socketIo = require("socket.io");
 
@@ -71,7 +70,7 @@ app.get('/flightsByDate/:date', (req, res) => {
 io.on("connection", (socket) => {
 
   function handleNewFlight(newFlight) {
-    io.emit('newFlight', newFlight);
+    io.emit('newFlight', { method: "POST", newFlight });
   }
 
   db.query("SELECT * FROM flights", (err, result) => {
@@ -85,7 +84,7 @@ io.on("connection", (socket) => {
   const changeStream = db.query("SELECT * FROM flights").stream();
 
   changeStream.on("data", (data) => {
-    socket.emit("dataUpdated", data);
+    socket.emit("dataUpdated", { method: "PUT", updatedFlight: data });
   });
 
   changeStream.on("end", () => {

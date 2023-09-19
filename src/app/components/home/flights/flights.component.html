@@ -8,7 +8,7 @@
         <div class="table__cell">Reg</div>
         <div class="table__cell">A/C Type</div>
     </div>
-    <div class="table__row" *ngFor="let flight of flights">
+    <div class="table__row" *ngFor="let flight of flights"  [ngClass]="{ 'updated-row': flight.id === updatedFlightId }">
         <div><i class="fa-solid fa-chevron-right"></i></div>
         <div class="table__cell">{{flight.dep_iata}}</div>
         <div class="table__cell">{{flight.status}}</div>

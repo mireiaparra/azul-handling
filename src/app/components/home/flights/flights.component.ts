@@ -11,6 +11,7 @@ import { SocketService } from 'src/app/core/socket.service';
 })
 export class FlightsComponent {
   public flights: any[] = [];
+  public updatedFlightId: string | null = null;
 
   constructor(
     private _apiService: ApiService,
@@ -30,8 +31,19 @@ export class FlightsComponent {
       this.flights = data;
     });
 
-    this.socketService.on('dataUpdated', (data: any[]) => {
-      this.flights = data;
+    this.socketService.on('dataUpdated', (data: any) => {
+      const method = data.method; 
+
+      if (method === 'PUT') {
+        this.updatedFlightId = data.id;
+
+        setTimeout(() => {
+          this.updatedFlightId = null;
+        }, 2000);
+      }
+        if (method === 'POST') {
+          this.flights.push(data.newFlight); 
+        }
     });
 
     this._filtersService.airportFilter$.subscribe((airportCode) => {
