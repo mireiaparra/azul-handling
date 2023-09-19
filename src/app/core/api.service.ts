@@ -55,7 +55,9 @@ export class ApiService {
         "arr_delayed": 137
       }]}
     )
-    // return this._http.get<{data:  any}>('https://airlabs.co/api/v9/schedules?dep_iata=TFS&api_key=f2b540bf-e0de-403b-8560-22f45de02a75')
+      // return this._http.get<{data:  any}>('https://airlabs.co/api/v9/flights?flag=ES&api_key=f2b540bf-e0de-403b-8560-22f45de02a75')
+    
+    // return this._http.get<{data:  any}>('https://airlabs.co/api/v9/schedules&api_key=f2b540bf-e0de-403b-8560-22f45de02a75')
   }
 
   public getAirports():Observable<{data: any}> {

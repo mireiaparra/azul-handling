@@ -5,8 +5,9 @@
     background-color: $azul-oscuro;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 30px;
     padding: 20px;
+    border-bottom: 3px solid $amarillo;
 
     &__title {
         color: white;
@@ -17,13 +18,18 @@
         display: flex;
         flex-direction: column;
         gap: 10px;
-        width: 316px;
+        width: 350px;
         &--top {
             display: flex;
             gap: 10px;
             & * .input {
                 width: 100px;
             }
+            & * .input__date, .input__date {
+                width: 80px;
+            }
+      
         }
     }
 }
+

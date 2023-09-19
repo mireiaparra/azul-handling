@@ -1,21 +1,41 @@
 <header class="header">
-    <div class="header__filters">
-        <div class="header__filters--top">
-            <div class="input__container">
-                <input class="input" [matDatepicker]="picker" [(ngModel)]="selectedDate" (ngModelChange)="onDateSelected()">
-                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-                <button (click)="setToday()">Today</button>
-            </div>
-                <mat-select class="input" (selectionChange)="onAirportFilterChange($event)">
-                    <mat-option  *ngFor="let airport of airports" [value]="airport.iata_code">{{airport.iata_code}}</mat-option>
-                  </mat-select>
-        </div>
-
-        <div class="input__container">
-            <input type="text" class="input" placeholder="Flight, Orig, Dest, Reg, Team Leader">
-            <i class="fa-solid fa-magnifying-glass input__icon"></i>
-        </div>
+  <div class="header__filters">
+    <div class="header__filters--top">
+      <div class="input__container">
+        <input
+          class="input input__date"
+          [matDatepicker]="picker"
+          matInput
+          [(ngModel)]="selectedDate"
+          (ngModelChange)="onDateSelected()"
+        />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </div>
+      <button (click)="setToday()" class="button">Today</button>
+      <mat-select
+        class="input input__select"
+        (selectionChange)="onAirportFilterChange($event)"
+      >
+        <mat-option
+          *ngFor="let airport of airports"
+          [value]="airport.iata_code"
+          >{{ airport.iata_code }}</mat-option
+        >
+      </mat-select>
     </div>
-    <h1 class="header__title">Operations</h1>
+
+    <div class="input__container">
+      <input
+        type="text"
+        class="input"
+        placeholder="Flight, Orig, Dest, Reg, Team Leader"
+      />
+      <i class="fa-solid fa-magnifying-glass input__icon"></i>
+    </div>
+  </div>
+  <h1 class="header__title">Operations</h1>
 </header>

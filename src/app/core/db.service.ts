@@ -7,7 +7,7 @@ import { Observable, of } from 'rxjs';
 })
 export class DbService {
 
-    private baseUrl = 'http://localhost:3000'; 
+  private baseUrl = 'http://vps-5df88ab9.vps.ovh.net:3000'; 
   constructor(private _http: HttpClient) { }
 
 
@@ -21,7 +21,7 @@ export class DbService {
   }
 
 
-  public getFlightsByDate(date: Date): Observable<any[]> {
+  public getFlightsByDate(date: string): Observable<any[]> {
     const url = `${this.baseUrl}/flightsByDate/${date}`;
     return this._http.get<any[]>(url);
   }

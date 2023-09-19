@@ -8,7 +8,7 @@ export class SocketService {
   private socket: Socket;
 
   constructor() {
-    this.socket = io('http://localhost:3000');
+    this.socket = io('http://vps-5df88ab9.vps.ovh.net:3000');
   }
 
   public emit(event: string, data: any): void {

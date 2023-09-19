@@ -3,11 +3,17 @@ mat-datepicker-toggle {
     right: 0;
 }
 
-::ng-deep .mat-mdc-select  {
+::ng-deep .mat-mdc-select {
     height: 14px !important;
-  }
+}
 
-  ::ng-deep .mat-mdc-select-arrow-wrapper {
+::ng-deep .mat-mdc-select-arrow-wrapper {
     position: absolute;
     right: -10px;
-  }
+    top: -20px;
+}
+
+::ng-deep .mat-mdc-select-value {
+    position: absolute;
+    bottom: -2px;
+}

@@ -64,7 +64,8 @@ export class FlightsComponent {
   }
 
   public getFlightsByDate(date: Date): void {
-    this._dbService.getFlightsByDate(date).subscribe({
+    const formattedDate = date.toISOString().slice(0, 10);
+    this._dbService.getFlightsByDate(formattedDate).subscribe({
       next: (data) => {
         this.flights = data;
       },
