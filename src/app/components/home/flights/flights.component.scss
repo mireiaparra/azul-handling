@@ -1,13 +1,1 @@
-.updated-row {
-    animation: flash 2s ease-in-out; /* Animación de parpadeo durante 2 segundos */
-    border: 2px solid yellow; /* Borde amarillo */
-  }
-  
-  @keyframes flash {
-    0%, 100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0;
-    }
-  }
+

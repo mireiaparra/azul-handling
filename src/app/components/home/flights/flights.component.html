@@ -1,19 +1,22 @@
 <section class="table">
-<div class="table__title"></div>
+  <div class="table__title"></div>
 
-    <div class="table__row table__row--head">
-        <div class="table__cell"></div>
-        <div class="table__cell">APT</div>
-        <div class="table__cell">Flight Status</div>
-        <div class="table__cell">Reg</div>
-        <div class="table__cell">A/C Type</div>
-    </div>
-    <div class="table__row" *ngFor="let flight of flights"  [ngClass]="{ 'updated-row': flight.id === updatedFlightId }">
-        <div><i class="fa-solid fa-chevron-right"></i></div>
-        <div class="table__cell">{{flight.dep_iata}}</div>
-        <div class="table__cell">{{flight.status}}</div>
-        <div class="table__cell bold">{{flight.reg_number}}</div>
-        <div class="table__cell">{{flight.aircraft_icao}}</div>
-    </div>
-
+  <div class="table__row table__row--head">
+    <div class="table__cell"></div>
+    <div class="table__cell">APT</div>
+    <div class="table__cell">Flight Status</div>
+    <div class="table__cell">Reg</div>
+    <div class="table__cell">A/C Type</div>
+  </div>
+  <div
+    class="table__row"
+    *ngFor="let flight of flights"
+    [ngClass]="{ 'updated-row': flight.id === updatedFlightId }"
+  >
+    <div><i class="fa-solid fa-chevron-right table__cell"></i></div>
+    <div class="table__cell">{{ flight.dep_iata }}</div>
+    <div class="table__cell">{{ flight.status | titlecase }}</div>
+    <div class="table__cell bold">{{ flight.reg_number }}</div>
+    <div class="table__cell">{{ flight.aircraft_icao }}</div>
+  </div>
 </section>

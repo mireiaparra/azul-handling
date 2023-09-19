@@ -4,12 +4,11 @@
     align-items: center;
     font-size: 26px;
     gap: 10px;
- 
 
     &__container {
         padding: 25px 20px;
         position: sticky;
-        top: 50px;
+        top: 140px;
         gap: 10px;
     }
     &__item {
@@ -19,7 +18,7 @@
         justify-content: center;
         align-items: center;
         color: rgb(193, 191, 191);
-        &:not(:first-child){
+        &:not(:first-child) {
             border-top: 1px solid rgb(137, 135, 135);
         }
     }
