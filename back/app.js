@@ -5,13 +5,20 @@ const socketIo = require("socket.io");
 
 const mysql = require("mysql");
 const path = require("path");
+const bodyParser = require('body-parser')
 
 const app = express();
 const server = http.createServer(app);
-const io = socketIo(server);
+const io = socketIo(server, {
+  cors: {
+    origin: '*'
+  }
+});
 
 app.use(cors()); 
-
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
+ 
 const port = process.env.PORT || 3000;
 
 const db = mysql.createConnection({
@@ -70,6 +77,56 @@ app.get('/flightsByDate/:date', (req, res) => {
   });
 });
 
+app.post('/flights', (req, res) => {
+  const {reg_number, dep_iata, aircraft_icao, status, arr_iata, dep_time } = req.body;
+  if (!reg_number) {
+    return res.status(422).json({ error: 'reg_number must be specified' });
+  }
+  // Find the flight
+  let query = `SELECT * FROM flights WHERE reg_number = ?;`;
+  db.query(query, [reg_number], (err, result) => {
+    if (err) {
+      console.error('Error finding flight: ' + err);
+      res.status(500).json({ error: 'Error finding flight.' });
+    } else {
+      const newFlight = {reg_number, dep_iata, aircraft_icao, status, arr_iata, dep_time };
+      // If the flight exists, then update it
+      if (result.length !== 0) {
+        query = `UPDATE flights SET dep_iata =  ?, aircraft_icao = ?, status = ?, arr_iata = ?, dep_time = ? WHERE reg_number = ?;`;
+        db.query(query, [dep_iata, aircraft_icao, status, arr_iata, dep_time, reg_number], (err, result) => {
+          if (err) {
+            console.error('Error updating flight: ' + err);
+            return res.status(500).json({ error: 'Error updating flight.' });
+          } else {
+            // Emit the flight
+            io.emit('dataUpdated', { method: "PUT", newFlight });
+            return res.json(newFlight);
+          }
+        });
+      }
+      // Else insert it
+      else {
+        query = `INSERT INTO flights (reg_number, dep_iata, aircraft_icao, status, arr_iata, dep_time)  
+        VALUES (?, ?, ?, ?, ?, ?);`
+      
+        db.query(query, [reg_number, dep_iata, aircraft_icao, status, arr_iata, dep_time], (err, result) => {
+          if (err) {
+            console.error('Error posting flight: ' + err);
+            return res.status(500).json({ error: 'Error posting flight.' });
+          } else {
+            io.emit('newFlight', { method: "POST", newFlight });
+            io.emit('dataUpdated', { method: "PUT", newFlight });
+            return res.json(newFlight);
+          }
+        });
+      }
+    }
+  });
+
+  
+
+})
+
 io.on("connection", (socket) => {
 
   function handleNewFlight(newFlight) {
@@ -84,15 +141,6 @@ io.on("connection", (socket) => {
     }
   });
 
-  const changeStream = db.query("SELECT * FROM flights").stream();
-
-  changeStream.on("data", (data) => {
-    socket.emit("dataUpdated", { method: "PUT", updatedFlight: data });
-  });
-
-  changeStream.on("end", () => {
-    console.log("Observer finished");
-  });
 });
 
 server.listen(port, () => {
