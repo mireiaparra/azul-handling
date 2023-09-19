@@ -6,14 +6,17 @@ import { FiltersService } from 'src/app/core/filters.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
   public flights: any[] = [];
   public airports: any[] = [];
   public selectedDate: Date;
 
-  constructor(private _apiService: ApiService, private _filtersService: FiltersService) {
+  constructor(
+    private _apiService: ApiService,
+    private _filtersService: FiltersService
+  ) {
     this._apiService.getFlights().subscribe({
       next: (data) => {
         this.flights = data.data;
@@ -29,13 +32,17 @@ export class HeaderComponent {
     this.selectedDate = new Date();
   }
 
-  onAirportFilterChange(event: MatSelectChange) {
+  public onAirportFilterChange(event: MatSelectChange) {
     const airportCode = event.value;
     this._filtersService.setAirportFilter(airportCode);
   }
 
-  onDateSelected() {
+  public onDateSelected() {
     this._filtersService.setDateFilter(this.selectedDate);
   }
 
+  public setToday() {
+    this.selectedDate = new Date();
+    this._filtersService.setDateFilter(this.selectedDate);
+  }
 }
