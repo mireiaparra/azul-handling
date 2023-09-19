@@ -2,13 +2,12 @@
     <div class="header__filters">
         <div class="header__filters--top">
             <div class="input__container">
-                <input class="input" [matDatepicker]="picker">
+                <input class="input" [matDatepicker]="picker" [(ngModel)]="selectedDate">
                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </div>
-                <mat-select class="input">
-                    <mat-option  *ngFor="" value="option1">TFS</mat-option>
-                    <mat-option value="option2">SVQ</mat-option>
+                <mat-select class="input" (selectionChange)="onAirportFilterChange($event)">
+                    <mat-option  *ngFor="let airport of airports" [value]="airport.iata_code">{{airport.iata_code}}</mat-option>
                   </mat-select>
         </div>
 

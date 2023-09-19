@@ -11,8 +11,19 @@ export class DbService {
   constructor(private _http: HttpClient) { }
 
 
-  public getFlights(): Observable<{data: any}> {
+  public getFlights(): Observable<Object> {
     return this._http.get(`${this.baseUrl}/flights`);
+  }
+
+  public getFlightsByAirport(airportCode: string): Observable<any[]> {
+    const url = `${this.baseUrl}/flightsByAirport/${airportCode}`;
+    return this._http.get<any[]>(url);
+  }
+
+
+  public getFlightsByDate(date: Date): Observable<any[]> {
+    const url = `${this.baseUrl}/flightsByDate/${date}`;
+    return this._http.get<any[]>(url);
   }
 
 }
