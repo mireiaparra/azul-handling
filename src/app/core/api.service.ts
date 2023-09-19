@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, of, map} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -55,9 +55,15 @@ export class ApiService {
     //     "arr_delayed": 137
     //   }]}
     // )
-      // return this._http.get<{data:  any}>('https://airlabs.co/api/v9/flights?flag=ES&api_key=f2b540bf-e0de-403b-8560-22f45de02a75')
     
-    return this._http.get<{data:  any}>('https://airlabs.co/api/v9/schedules&api_key=f2b540bf-e0de-403b-8560-22f45de02a75')
+    return this._http.get<{response:  any}>('https://airlabs.co/api/v9/schedules?dep_iata=SVQ&api_key=f2b540bf-e0de-403b-8560-22f45de02a75')
+    .pipe(
+      map((data) => {
+        return {
+          data: data.response,
+        };
+      })
+    );
   }
 
 }
