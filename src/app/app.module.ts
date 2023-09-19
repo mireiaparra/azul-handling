@@ -15,6 +15,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { SnackbarComponent } from './components/snackbar/snackbar.component';
+import { MatIconModule } from '@angular/material/icon';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +27,8 @@ import { FormsModule } from '@angular/forms';
     HomeComponent,
     ArrivalsComponent,
     DeparturesComponent,
-    FlightsComponent
+    FlightsComponent,
+    SnackbarComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +38,8 @@ import { FormsModule } from '@angular/forms';
     MatNativeDateModule,
     MatSelectModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

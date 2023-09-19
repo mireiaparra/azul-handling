@@ -69,6 +69,11 @@ app.get('/flightsByDate/:date', (req, res) => {
 });
 
 io.on("connection", (socket) => {
+
+  function handleNewFlight(newFlight) {
+    io.emit('newFlight', newFlight);
+  }
+
   db.query("SELECT * FROM flights", (err, result) => {
     if (err) {
       console.error("Error fetching flight data:  " + err);
