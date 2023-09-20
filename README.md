@@ -54,5 +54,5 @@ La API externa que proporciona datos de llegadas y salidas está limitada a 1,00
 - Asegúrate de contar con las API externas necesarias y gestionar las consultas según el límite gratuito especificado.
 - La documentación técnica detallada se encuentra en el código fuente y puede consultarse en los comentarios correspondientes.
 
-¡Gracias por revisar este proyecto de prueba técnica para Azul Handling! Si tienes alguna pregunta o necesitas más información, no dudes en contactarnos.
+¡Gracias por revisar este proyecto de prueba técnica para Azul Handling! Si tienes alguna pregunta o necesitas más información, no dudes en contactarme.
 
